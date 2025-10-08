@@ -4,26 +4,13 @@
 
 .home-page .products-grid {
   display: grid;
-
-  /* - In CSS Grid, 1fr means a column will take up the
-       remaining space in the grid.
-     - If we write 1fr 1fr ... 1fr; 8 times, this will
-       divide the grid into 8 columns, each taking up an
-       equal amount of the space.
-     - repeat(8, 1fr); is a shortcut for repeating "1fr"
-       8 times (instead of typing out "1fr" 8 times).
-       repeat(...) is a special property that works with
-       display: grid; */
+  gap: 15px;
   grid-template-columns: repeat(8, 1fr);
 }
 
-/* @media is used to create responsive design (making the
-   website look good on any screen size). This @media
-   means when the screen width is 2000px or less, we
-   will divide the grid into 7 columns instead of 8. */
 @media (max-width: 2000px) {
   .home-page .products-grid {
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
@@ -66,14 +53,8 @@
 }
 
 .home-page .product-container {
-  padding-top: 40px;
-  padding-bottom: 25px;
-  padding-left: 25px;
-  padding-right: 25px;
-
-  border-right: 1px solid rgb(240, 240, 240);
-  border-bottom: 1px solid rgb(240, 240, 240);
-
+  padding: 15px;
+  border: 1px solid rgb(222, 222, 222);
   display: flex;
   flex-direction: column;
 }
@@ -96,6 +77,7 @@
 }
 
 .home-page .product-name {
+  text-align: left;
   height: 40px;
   margin-bottom: 5px;
 }
@@ -118,12 +100,14 @@
 }
 
 .home-page .product-price {
+  text-align: left;
   font-weight: 700;
   margin-bottom: 10px;
 }
 
 .home-page .product-quantity-container {
   margin-bottom: 17px;
+  text-align: left;
 }
 
 .home-page .product-spacer {
