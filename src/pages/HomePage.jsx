@@ -4,6 +4,20 @@ import { Header } from '../components/Header'
 import { products } from '../../data/products.js'
 
 export function HomePage() {
+
+   fetch('http://localhost:3000/api/poducts')
+      .then((response) => {
+         if (!response.ok) {
+            throw new Error('Network response was not ok')
+         }
+         return response.json()
+      })
+      .then(data => console.log(data))
+      .catch((error) => {
+         console.error('❌ There was a problem with the fetch operation:', error)
+
+      })
+
    return (
       <>
          <title>Home Page Ecommerce</title>
@@ -23,7 +37,7 @@ export function HomePage() {
                               {product.name}
                            </div>
                            <div className="product-rating-container">
-                              <img className="product-rating-stars" src={`images/ratings/rating-${product.rating.stars*10}.png`} />
+                              <img className="product-rating-stars" src={`images/ratings/rating-${product.rating.stars * 10}.png`} />
                               <div className="product-rating-count link-primary">
                                  {product.rating.count}
                               </div>
