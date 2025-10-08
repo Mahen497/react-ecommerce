@@ -1,22 +1,32 @@
+import axios from 'axios'
 import React from 'react'
 import './Homepage.css'
 import { Header } from '../components/Header'
 import { products } from '../../data/products.js'
 
+
 export function HomePage() {
 
-   fetch('http://localhost:3000/api/poducts')
-      .then((response) => {
-         if (!response.ok) {
-            throw new Error('Network response was not ok')
-         }
-         return response.json()
-      })
-      .then(data => console.log(data))
-      .catch((error) => {
-         console.error('❌ There was a problem with the fetch operation:', error)
+   // fetch('http://localhost:3000/api/poducts')
+   //    .then((response) => {
+   //       if (!response.ok) {
+   //          throw new Error('Network response was not ok')
+   //       }
+   //       return response.json()
+   //    })
+   //    .then(data => console.log(data))
+   //    .catch((error) => {
+   //       console.error('❌ There was a problem with the fetch operation:', error)
+   //    })
 
+   axios.get('http://localhost:3000/api/products')
+      .then((response) => {
+         console.log(response.data);
       })
+      .catch((error) => {
+         console.error('❌ Error fetching products:', error);
+      });
+
 
    return (
       <>
