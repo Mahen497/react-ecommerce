@@ -2,10 +2,13 @@ import axios from 'axios'
 import React from 'react'
 import './Homepage.css'
 import { Header } from '../components/Header'
-import { products } from '../../data/products.js'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 
 export function HomePage() {
+
+   const [products, setProducts] = useState([]);
 
    // fetch('http://localhost:3000/api/poducts')
    //    .then((response) => {
@@ -19,13 +22,15 @@ export function HomePage() {
    //       console.error('❌ There was a problem with the fetch operation:', error)
    //    })
 
-   axios.get('http://localhost:3000/api/products')
-      .then((response) => {
-         console.log(response.data);
-      })
-      .catch((error) => {
-         console.error('❌ Error fetching products:', error);
-      });
+   useEffect(() => {
+      axios.get('http://localhost:3000/api/products')
+         .then((response) => {
+            setProducts(response.data);
+         })
+         .catch((error) => {
+            console.error('❌ Error fetching products:', error);
+         });
+   }, [])
 
 
    return (
