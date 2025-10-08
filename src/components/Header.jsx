@@ -2,7 +2,13 @@ import React from 'react'
 import { Link } from 'react-router'
 import './header.css'
 
-export function Header() {
+export function Header({ cart = [] }) {
+   console.log('cart in header', cart);
+   let totlaQuantity = 0;
+   cart.forEach((element) => {
+      totlaQuantity += element.quantity
+      console.log('element', totlaQuantity);
+   });
    return (
       <>
          <div className="header">
@@ -25,13 +31,12 @@ export function Header() {
 
             <div className="right-section">
                <Link to="/orders" className="orders-link header-link" >
-
                   <span className="orders-text">Orders</span>
                </Link>
 
                <Link to="/checkout" className="cart-link header-link" >
                   <img className="cart-icon" src="images/icons/cart-icon.png" />
-                  <div className="cart-quantity">3</div>
+                  <div className="cart-quantity">{totlaQuantity}</div>
                   <div className="cart-text">Cart</div>
                </Link>
             </div>

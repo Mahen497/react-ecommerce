@@ -9,6 +9,8 @@ import { useState } from 'react'
 export function HomePage() {
 
    const [products, setProducts] = useState([]);
+   const [cart, setCart] = useState([])
+   console.log('cart in header', cart);
 
    // fetch('http://localhost:3000/api/poducts')
    //    .then((response) => {
@@ -30,6 +32,14 @@ export function HomePage() {
          .catch((error) => {
             console.error('❌ Error fetching products:', error);
          });
+
+      axios.get('http://localhost:3000/api/cart-items')
+         .then((response) => {
+            setCart(response.data);
+         })
+         .catch((error) => {
+            console.error('❌ Error fetching hello:', error);
+         });
    }, [])
 
 
@@ -37,12 +47,11 @@ export function HomePage() {
       <>
          <title>Home Page Ecommerce</title>
 
-         <Header />
+         <Header cart={cart} />
          <div className="home-page">
             <div className="products-grid">
                {
                   products.map((product) => {
-                     console.log(product);
                      return (
                         <div key={product.id} className="product-container">
                            <div className="product-image-container">

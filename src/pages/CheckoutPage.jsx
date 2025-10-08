@@ -1,11 +1,15 @@
 import React from 'react'
+import { Helmet } from "react-helmet";
+
 import './checkout-header.css'
 import './CheckoutPage.css'
 
 export function CheckoutPage() {
    return (
       <>
-         <title>Checkout - Ecommerce</title>
+         <Helmet>
+            <title>Checkout - Ecommerce</title>
+         </Helmet>
 
          <div className="checkout-header">
             <div className="header-content">
