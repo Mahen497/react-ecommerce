@@ -18,13 +18,20 @@ export function CheckoutPage({ cart }) {
          })
    }, [])
 
+   const fetchData = async () => {
+      const delivery = await axios.get('/api/payment-summary')
+      setPaymentSummary(delivery.data);
+   }
+
    useEffect(() => {
-      axios.get('/api/payment-summary')
-         .then((response) => {
-            console.log('payment summary', response.data);
-            setPaymentSummary(response.data);
-         })
+      fetchData();
    }, [])
+
+   function handleDeliveryOptionChange(productId, newOptionId) {
+      // Example: update delivery option in cart or backend
+      console.log(`Changed delivery option for ${productId} to ${newOptionId}`);
+   }
+
 
    return (
       <>
@@ -70,7 +77,12 @@ export function CheckoutPage({ cart }) {
                            return (
                               <div key={cartItem.productId} className="cart-item-container">
                                  <div className="delivery-date">
-                                    Delivery date: {dayjs(selectedDeliveryOption.estimatedDeliveryTimeMs).format('dddd, MMMM D')}
+
+                                    Delivery date: {
+                                       selectedDeliveryOption
+                                          ? dayjs(selectedDeliveryOption.estimatedDeliveryTimeMs).format('dddd, MMMM D')
+                                          : 'Loading...'
+                                    }
                                  </div>
 
                                  <div className="cart-item-details-grid">
@@ -114,8 +126,10 @@ export function CheckoutPage({ cart }) {
                                                 }
                                                 return (
                                                    <div key={deliveryOption.id} className="delivery-option">
-                                                      <input type="radio"
+                                                      <input
+                                                         type="radio"
                                                          checked={cartItem.deliveryOptionId === deliveryOption.id}
+                                                         onChange={() => handleDeliveryOptionChange(cartItem.productId, deliveryOption.id)}
                                                          className="delivery-option-input"
                                                          name={`delivery-option-${cartItem.productId}`} />
                                                       <div>
