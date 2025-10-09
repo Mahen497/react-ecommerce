@@ -6,7 +6,7 @@ export function PaymentSummary({ paymentSummary }) {
       <>
          <div className="payment-summary">
             <div className="payment-summary-title">
-               Payment Summary
+               <h2>Payment Summary</h2>
             </div>
 
             {paymentSummary && (

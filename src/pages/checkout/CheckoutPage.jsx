@@ -43,12 +43,20 @@ export function CheckoutPage({ cart }) {
             <title>Checkout - Ecommerce</title>
          </Helmet>
 
-         <div className="checkout-header">
+         <div className="checkout-header" role="banner">
             <div className="header-content">
                <div className="checkout-header-left-section">
-                  <a href="/">
-                     <img className="logo" src="images/logo.png" />
-                     <img className="mobile-logo" src="images/mobile-logo.png" />
+                  <a href="/" aria-label="Go to homepage">
+                     <img
+                        className="logo"
+                        src="images/logo.png"
+                        alt='Ecommerce logo'
+                     />
+                     <img
+                        className="mobile-logo"
+                        src="images/mobile-logo.png"
+                        alt='Ecommerce logo'
+                     />
                   </a>
                </div>
 
@@ -63,14 +71,17 @@ export function CheckoutPage({ cart }) {
             </div>
          </div>
 
-         <div className="checkout-page">
-            <div className="page-title">Review your order</div>
+         <main className="checkout-page">
+            <h1 className="page-title-">Review your order</h1>
 
             <div className="checkout-grid">
-               <OrderSummary cart={cart} deliveryOption={deliveryOption} handleDeliveryOptionChange={(() => handleDeliveryOptionChange)} />
+               <OrderSummary
+                  cart={cart}
+                  deliveryOption={deliveryOption}
+                  handleDeliveryOptionChange={handleDeliveryOptionChange} />
                <PaymentSummary paymentSummary={paymentSummary} />
             </div>
-         </div>
+         </main>
       </>
    )
 }
