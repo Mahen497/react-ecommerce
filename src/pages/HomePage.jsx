@@ -6,11 +6,10 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 
 
-export function HomePage() {
+export function HomePage({cart}) {
 
    const [products, setProducts] = useState([]);
-   const [cart, setCart] = useState([])
-   console.log('cart in header', cart);
+   
 
    // fetch('http://localhost:3000/api/poducts')
    //    .then((response) => {
@@ -33,13 +32,6 @@ export function HomePage() {
             console.error('❌ Error fetching products:', error);
          });
 
-      axios.get('/api/cart-items')
-         .then((response) => {
-            setCart(response.data);
-         })
-         .catch((error) => {
-            console.error('❌ Error fetching hello:', error);
-         });
    }, [])
 
 
