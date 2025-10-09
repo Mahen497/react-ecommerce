@@ -1,15 +1,14 @@
-import axios from 'axios'
 import React from 'react'
-import './Homepage.css'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 import { Header } from '../components/Header'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import './Homepage.css'
+import { formatMoney } from '../utils/money'
 
-
-export function HomePage({cart}) {
+export function HomePage({ cart }) {
 
    const [products, setProducts] = useState([]);
-   
+
 
    // fetch('http://localhost:3000/api/poducts')
    //    .then((response) => {
@@ -59,7 +58,7 @@ export function HomePage({cart}) {
                               </div>
                            </div>
                            <div className="product-price">
-                              ${(product.priceCents / 100).toFixed(2)}
+                              ${formatMoney(product.priceCents)}
                            </div>
 
                            <div className="product-quantity-container">
