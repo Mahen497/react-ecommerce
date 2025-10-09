@@ -21,15 +21,13 @@ export function HomePage({ cart }) {
    //       console.error('❌ There was a problem with the fetch operation:', error)
    //    })
 
-   useEffect(() => {
-      axios.get('/api/products')
-         .then((response) => {
-            setProducts(response.data);
-         })
-         .catch((error) => {
-            console.error('❌ Error fetching products:', error);
-         });
 
+   useEffect(() => {
+      const getHomeData = async () => {
+         const response = await axios.get('/api/products')
+         setProducts(response.data);
+      }
+      getHomeData();
    }, [])
 
 

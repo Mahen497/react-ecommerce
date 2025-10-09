@@ -1,39 +1,33 @@
 import React, { useState, useEffect } from 'react'
-
 import axios from 'axios';
-
 import './checkout-header.css'
 import './CheckoutPage.css'
 import { OrderSummary } from './OrderSummary';
 import { PaymentSummary } from './PaymentSummary';
 import { Helmet } from 'react-helmet-async';
 
-
-
-
 export function CheckoutPage({ cart }) {
 
    const [deliveryOption, setDeliveryOption] = useState([]);
    const [paymentSummary, setPaymentSummary] = useState(null);
 
-   useEffect(() => {
-      axios.get('/api/delivery-options?expand=estimatedDeliveryTime')
-         .then((response) => {
-            setDeliveryOption(response.data);
-         })
-   }, [])
 
-   const fetchData = async () => {
-      try{
-         const delivery = await axios.get('/api/payment-summary')
-         setPaymentSummary(delivery.data);
-      }catch(error){
-         console.error('❌ Error fetching payment summary:', error);
+   useEffect(() => {
+      const fetchCheckoutData = async () => {
+         try {
+            const [deliveryResponse, paymentResponse] = await Promise.all([
+               await axios.get('/api/delivery-options?expand=estimatedDeliveryTime'),
+               await axios.get('/api/payment-summary')
+            ]);
+            setDeliveryOption(deliveryResponse.data);
+            setPaymentSummary(paymentResponse.data);
+         } catch (error) {
+            console.error('❌ Error fetching delivery options:', error);
+         }
       }
-   }
 
-   useEffect(() => {
-      fetchData();
+      fetchCheckoutData();
+
    }, [])
 
    function handleDeliveryOptionChange(productId, newOptionId) {
@@ -44,11 +38,10 @@ export function CheckoutPage({ cart }) {
 
    return (
       <>
-         {/* <Helmet> */}         
+         {/* <Helmet> */}
          <Helmet>
             <title>Checkout - Ecommerce</title>
          </Helmet>
-         
 
          <div className="checkout-header">
             <div className="header-content">
