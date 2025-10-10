@@ -6,7 +6,7 @@ import { OrderSummary } from './OrderSummary';
 import { PaymentSummary } from './PaymentSummary';
 import { Helmet } from 'react-helmet-async';
 
-export function CheckoutPage({ cart }) {
+export function CheckoutPage({ cart, loadCart }) {
 
    const [deliveryOption, setDeliveryOption] = useState([]);
    const [paymentSummary, setPaymentSummary] = useState(null);
@@ -28,13 +28,7 @@ export function CheckoutPage({ cart }) {
 
       fetchCheckoutData();
 
-   }, [])
-
-   function handleDeliveryOptionChange(productId, newOptionId) {
-      // Example: update delivery option in cart or backend
-      console.log(`Changed delivery option for ${productId} to ${newOptionId}`);
-   }
-
+   }, [cart])
 
    return (
       <>
@@ -78,7 +72,8 @@ export function CheckoutPage({ cart }) {
                <OrderSummary
                   cart={cart}
                   deliveryOption={deliveryOption}
-                  handleDeliveryOptionChange={handleDeliveryOptionChange} />
+
+                  loadCart={loadCart} />
                <PaymentSummary paymentSummary={paymentSummary} />
             </div>
          </main>
