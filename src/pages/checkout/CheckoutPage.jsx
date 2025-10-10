@@ -74,7 +74,7 @@ export function CheckoutPage({ cart, loadCart }) {
                   deliveryOption={deliveryOption}
 
                   loadCart={loadCart} />
-               <PaymentSummary paymentSummary={paymentSummary} />
+               <PaymentSummary paymentSummary={paymentSummary} loadCart={loadCart}/>
             </div>
          </main>
       </>
