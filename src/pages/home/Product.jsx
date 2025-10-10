@@ -32,19 +32,28 @@ export function Product({ product, loadCart }) {
       <>
          <div className="product-container">
             <div className="product-image-container">
-               <img className="product-image" src={product.image} />
+               <img
+                  className="product-image"
+                  src={product.image}
+                  alt={product.name}
+                  data-testid="product-image"
+               />
             </div>
             <div className="product-name limit-text-to-2-lines">
                {product.name}
             </div>
             <div className="product-rating-container">
-               <img className="product-rating-stars" src={`images/ratings/rating-${product.rating.stars * 10}.png`} />
+               <img
+                  className="product-rating-stars"
+                  src={`images/ratings/rating-${product.rating.stars * 10}.png`}
+                  data-testid="product-rating-img"
+               />
                <div className="product-rating-count link-primary">
                   {product.rating.count}
                </div>
             </div>
             <div className="product-price">
-               ${formatMoney(product.priceCents)}
+               {formatMoney(product.priceCents)}
             </div>
             <div className="product-quantity-container">
                <select value={quantity} onChange={handleQuantityChange}>
