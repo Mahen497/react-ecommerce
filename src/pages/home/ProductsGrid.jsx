@@ -24,15 +24,59 @@ export function ProductsGrid({ products, loadCart }) {
    }
 
    const indexOfLastItem = currentPage * itemsPerPage;
-   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+   // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+   const indexOfFirstItem = currentPage * itemsPerPage - itemsPerPage; 5
+
+   console.log('indexOfLastItem, indexOfFirstItem', indexOfLastItem, indexOfFirstItem)
+
    const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
 
    useEffect(() => {
       setCurrentPage(1); // Reset to first page when products change
-   }, [products])
+   }, [products, itemsPerPage])
+
+   const generatePageNumbers = () => {
+
+      const pages = [];
+      const maxPagesToShow = 5;
 
 
-   console.log("ProductsGrid Rendered: ", { currentPage, totalPages, indexOfLastItem, indexOfFirstItem, currentItems });
+      if (totalPages <= maxPagesToShow) {
+         console.log("✔️ Total Pages:", totalPages, "<= Max PagesToShow: ", maxPagesToShow);
+
+         for (let i = 1; i <= totalPages; i++) {
+            pages.push(i);
+         }
+      } else {
+         pages.push(1);
+
+         console.log('currentPage :', currentPage, 'totalPages :', totalPages);
+
+         if (currentPage > 3) {
+            pages.push('...')
+         }
+
+         const start = Math.max(2, currentPage - 1);
+         const end = Math.min(totalPages - 1, currentPage + 1);
+
+         console.log({ start, end });
+
+         for (let i = start; i <= end; i++) {
+            console.log("Adding page: ", i);
+            pages.push(i);
+         }
+
+         if (currentPage < totalPages - 2) {
+            pages.push('...')
+         }
+         pages.push(totalPages);
+         console.log("❌ Total Pages:", totalPages, "<= Max PagesToShow: ", maxPagesToShow);
+      }
+
+      return pages;
+   }
+   const pageNumbers = generatePageNumbers();
+   console.log('pageNumbers : ', pageNumbers);
 
    return (
       <>
@@ -43,7 +87,7 @@ export function ProductsGrid({ products, loadCart }) {
                onClick={goToPrevPage}
                disabled={currentPage === 1}
             >Previous</button>
-            {
+            {/* {
                Array.from({ length: totalPages }, (_, i) => (
                   <button
                      key={i}
@@ -54,6 +98,32 @@ export function ProductsGrid({ products, loadCart }) {
                      {i + 1}
                   </button>
                ))
+            } */}
+            {
+
+               pageNumbers.map((page, index) => {
+                  if (page === '...') {
+                     return <span key={Math.random(index)} className="px-2">...</span>;
+                  }
+                  return (
+                     <button
+                        key={page + 1}
+                        className={currentPage === page ? 'active' : ''}
+                        onClick={() => goToSpecificPage(page)}
+                        aria-label={`Page ${page}`}
+                     >
+                        {page}
+                     </button>
+                  )
+               })
+
+               //    key={page}
+               //    className={currentPage === page ? "active" : ""}
+               //    onClick={() => goToSpecificPage(page)}
+               //    aria-label={`Page ${page}`}
+               // >
+               //    {page}
+               // </button>
             }
             <button
                aria-label="Next Page"
