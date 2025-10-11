@@ -7,8 +7,6 @@ export function Product({ product, loadCart }) {
 
    const [showAddedMessage, setShowAddedMessage] = useState(false);
 
-   console.log(showAddedMessage);
-
    const addToCart = async () => {
       await axios.post('/api/cart-items', {
          productId: product.id,

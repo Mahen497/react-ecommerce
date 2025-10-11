@@ -9,6 +9,7 @@ import { Helmet } from 'react-helmet-async'
 export function HomePage({ cart, loadCart }) {
 
    const [products, setProducts] = useState([]);
+
    // fetch('http://localhost:3000/api/poducts')
    //    .then((response) => {
    //       if (!response.ok) {
@@ -42,6 +43,7 @@ export function HomePage({ cart, loadCart }) {
          <Header cart={cart} />
          <div className="home-page">
             <ProductsGrid products={products} loadCart={loadCart} />
+
          </div>
       </>
    )
