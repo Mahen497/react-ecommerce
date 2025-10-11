@@ -14,6 +14,130 @@ This project is a simple, modular **E-Commerce web application** built with Reac
 - **Cart Management:** Update product quantities or remove items from the cart.
 - **Checkout:** Review your cart and proceed to checkout.
 - **Responsive Design:** Optimized for both desktop and mobile devices.
+# React E-Commerce Project
+
+## Overview
+
+This project is a modular **E-Commerce web application** built with React for the frontend and Node.js/Express for the backend. It allows users to browse products, manage a shopping cart, and proceed to checkout. The project is structured for clarity and scalability, and includes unit testing with Vitest.
+
+---
+
+## Features
+
+- **Product Listing:** Browse all available products on the homepage.
+- **Product Details:** View detailed information about each product.
+- **Add to Cart:** Add products to your shopping cart from the listing or details page.
+- **Cart Management:** Update product quantities or remove items from the cart.
+- **Checkout:** Review your cart and proceed to checkout.
+- **Responsive Design:** Optimized for both desktop and mobile devices.
+- **Backend API:** Node.js/Express backend for product and cart data.
+- **Unit Testing:** Vitest is set up for frontend unit tests.
+
+---
+
+## Folder Structure
+
+```
+react-ecommerce/
+├── backend/
+│   ├── server.js
+│   └── ... (backend routes, models)
+├── public/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   │   └── checkout/
+│   │       └── CartItemDetails.jsx
+│   ├── App.jsx
+│   ├── index.js
+│   └── ...
+├── package.json
+├── vitest.config.js
+└── README.md
+```
+
+---
+
+## Components & Pages
+
+### Components
+
+- **Header.jsx:** Site logo, navigation, cart icon.
+- **Footer.jsx:** Site footer.
+- **ProductCard.jsx:** Individual product display.
+- **CartIcon.jsx:** Cart icon with item count.
+
+### Pages
+
+- **Home.jsx:** Product grid.
+- **ProductDetails.jsx:** Product info and add to cart.
+- **Cart.jsx:** Cart management.
+- **checkout/CartItemDetails.jsx:** Update/remove cart items.
+
+---
+
+## How the App Works
+
+1. **Frontend:**  
+   Users browse products, add to cart, and manage their cart. State is managed with React hooks or context.
+
+2. **Backend:**  
+   Node.js/Express serves product and cart data via REST API endpoints.
+
+3. **Testing:**  
+   Vitest is used for unit testing React components and logic.
+
+---
+
+## How to Run
+
+### 1. Backend
+
+```bash
+cd backend
+npm install
+node server.js
+```
+- The backend will run on [http://localhost:5000](http://localhost:5000) (or your configured port).
+
+### 2. Frontend
+
+```bash
+npm install
+npm start
+```
+- The frontend will run on [http://localhost:3000](http://localhost:3000).
+
+---
+
+## Running Tests with Vitest
+
+Vitest is set up for unit testing React components.
+
+- To run all tests:
+  ```bash
+  npx vitest
+  ```
+- To run tests in watch mode:
+  ```bash
+  npx vitest --watch
+  ```
+- Test files are typically in `src/__tests__/` or alongside components as `*.test.jsx`.
+
+---
+
+## Customization & Extension Ideas
+
+- Connect to a real database for persistent data.
+- Add authentication for user accounts.
+- Integrate payment gateways.
+- Add product categories, search, and filters.
+
+---
+
+## License
+
+This project is for learning and demonstration purposes.
 
 ---
 
